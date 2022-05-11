@@ -82,9 +82,14 @@ app.get("/cart", async (req, res) => {
       return res.status(406).send("Please, sign-in first!");
     }
     const cart = await db.collection("carts").findOne({email: session.email});
-    delete cart._id;
-    delete cart.email;
-    return res.status(200).send(cart.products);
+    const {products} = cart;
+
+    const instruments = db.collection("instruments").find().toArray();
+    instruments.filter(instrument => {
+      if(products.includes(instrument._id)) return true;
+      else return false;
+    })
+    return res.status(200).send(instruments);
   }catch(e){
     return res.sendStatus(500)
   }
