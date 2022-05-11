@@ -1,0 +1,36 @@
+{
+  "name": "projeto14-mymusic-back",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SADoug/projeto14-MyMusic-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SADoug/projeto14-MyMusic-back/issues"
+  },
+  "homepage": "https://github.com/SADoug/projeto14-MyMusic-back#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "chalk": "^5.0.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "mongodb": "^4.5.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
