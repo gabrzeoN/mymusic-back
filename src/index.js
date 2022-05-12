@@ -31,8 +31,8 @@ app.post("/sign-in", async (req, res) => {
   if(user && bcrypt.compareSync(password, user.password)) {
       const token = v4();
       await db.collection("sessions").insertOne({
-          userId: user._id,
-          token
+          email: user.email,
+          status: user.status
       })
       res.send(token);
       console.log(chalk.redBright.bold("sucess, user founded!"));
@@ -49,7 +49,8 @@ app.post("/sign-up", async (req, res) => {
       name: joi.string().min(1).required(),
       image: joi.any().required(),
       email: joi.string().min(1).required(), 
-      password: joi.string().min(8).required()
+      password: joi.string().min(8).required(),
+      confirmPassword: joi.ref('password')
 });
   const { error } = clientSchema.validate(client); // {value: info, [error]}
   if (error) {
@@ -62,9 +63,9 @@ app.post("/sign-up", async (req, res) => {
     if (clientExiste) {
       return res.sendStatus(409);
     }
-    await db.collection("users").insertOne({name: client.name, email: client.email, password: senhaHash });
+    await db.collection("users").insertOne({name: client.name, email: client.email, password: senhaHash, image: client.image });
     console.log(chalk.green.bold("client add to the database"));
-    res.sendStatus(201);
+    res.sendStatus(200);
 
   } catch (e) {
     console.log(e);
