@@ -15,6 +15,7 @@ app.use(json());
 
 let db = null;
 const mongoClient = new MongoClient("mongodb+srv://teste:teste@clusterdoug.oqldb.mongodb.net/ClusterDoug?retryWrites=true&w=majority");
+
 try{
     await mongoClient.connect()
     db = mongoClient.db(process.env.DATABASE);
@@ -52,6 +53,7 @@ app.post("/sign-up", async (req, res) => {
       password: joi.string().min(8).required(),
       confirmPassword: joi.ref('password')
 });
+  
   const { error } = clientSchema.validate(client); // {value: info, [error]}
   if (error) {
     console.log(error, "Not working");
@@ -71,9 +73,29 @@ app.post("/sign-up", async (req, res) => {
     console.log(e);
     return res.status(500).send("Error to add client to the database!", e);
   }
-
 });
 
+app.get("/cart", async (req, res) => {
+  const {authorization} = req.headers;
+  const token = authorization?.replace("Bearer", "").trim();
+  try{
+    const session = await db.collection("sessions").findOne({token});
+    if(!session || !session.status){
+      return res.status(406).send("Please, sign-in first!");
+    }
+    const cart = await db.collection("carts").findOne({email: session.email});
+    const {products} = cart;
+
+    const instruments = db.collection("instruments").find().toArray();
+    instruments.filter(instrument => {
+      if(products.includes(instrument._id)) return true;
+      else return false;
+    })
+    return res.status(200).send(instruments);
+  }catch(e){
+    return res.sendStatus(500)
+  }
+});
 
 
 
