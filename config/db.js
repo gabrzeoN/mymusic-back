@@ -4,7 +4,9 @@ import chalk from "chalk";
 dotenv.config();
 
 let db = null;
-const mongoClient = new MongoClient("mongodb+srv://teste:teste@clusterdoug.oqldb.mongodb.net/ClusterDoug?retryWrites=true&w=majority");
+// const mongoClient = new MongoClient("mongodb+srv://teste:teste@clusterdoug.oqldb.mongodb.net/ClusterDoug?retryWrites=true&w=majority");
+const mongoClient = new MongoClient(process.env.MONGO_URL);
+
 try{
     await mongoClient.connect()
     db = mongoClient.db(process.env.DATABASE);
