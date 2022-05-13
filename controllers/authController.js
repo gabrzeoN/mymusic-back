@@ -13,7 +13,8 @@ export async function signUp(req, res){
             email,
             password: senhaHash,
             registrationTime: dayjs().format('HH:mm:ss'),
-            registrationDate: dayjs().format('DD/MM/YY')
+            registrationDate: dayjs().format('DD/MM/YY'),
+            cart: []
         });
         return res.sendStatus(201);
     } catch (e) {
