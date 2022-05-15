@@ -38,3 +38,18 @@ export async function signIn(req, res){
         return res.sendStatus(500);
     }
 }
+
+export async function signOut(req, res){
+    const {authorization} = req.headers;
+    const token = authorization?.replace("Bearer", "").trim();
+    try{
+        await db.collection("sessions").updateOne(
+            {token},
+            {$set: {status: false}}
+        );
+        res.sendStatus(200);
+    }catch(e){
+        console.log("Error on PUT /sign-out", e);
+        res.sendStatus(500);
+    }
+}
