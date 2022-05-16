@@ -23,7 +23,7 @@ export async function signUp(req, res){
 }
 
 export async function signIn(req, res){
-    const {email} = res.locals.user;
+    const {email, name, image} = res.locals.user;
     const token = v4();
     try{
         await db.collection("sessions").insertOne({
@@ -33,8 +33,23 @@ export async function signIn(req, res){
             date: dayjs().format('DD/MM/YY'),
             status: true
         })
-        return res.status(201).send(token);
+        return res.status(201).send({token, name, image});
     }catch(e){
         return res.sendStatus(500);
+    }
+}
+
+export async function signOut(req, res){
+    const {authorization} = req.headers;
+    const token = authorization?.replace("Bearer", "").trim();
+    try{
+        await db.collection("sessions").updateOne(
+            {token},
+            {$set: {status: false}}
+        );
+        res.sendStatus(200);
+    }catch(e){
+        console.log("Error on PUT /sign-out", e);
+        res.sendStatus(500);
     }
 }
