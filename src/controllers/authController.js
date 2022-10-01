@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { v4 } from 'uuid';
-import db from "./../config/db.js";
+import db from "../config/db.js";
 import dayjs from "dayjs";
 
 export async function signUp(req, res){

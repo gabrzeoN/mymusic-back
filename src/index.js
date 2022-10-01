@@ -2,10 +2,10 @@ import express, {json} from "express";
 import dotenv from "dotenv";
 import chalk from "chalk";
 import cors from "cors";
-import authRouter  from "./../routers/authRouter.js";
-import cartRouter from "../routers/cartRouter.js";
-import storeRouter from "../routers/storeRouter.js";
-import paymentRouter from "../routers/paymentRouter.js";
+import authRouter  from "./routers/authRouter.js";
+import cartRouter from "./routers/cartRouter.js";
+import storeRouter from "./routers/storeRouter.js";
+import paymentRouter from "./routers/paymentRouter.js";
 
 // Server configurations
 dotenv.config();
