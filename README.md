@@ -3,9 +3,12 @@
 #### <p align = "center" style="color:red" > Confira também o [front-end](https://github.com/gabrzeoN/mymusic-front) </p>
 ##
 <div align = "center" >
-    <img src="./pictures/Linkr-1.png" width="900px" />
-    <img src="./pictures/Linkr-2.png" width="900px" />
-    <img src="./pictures/Linkr-3.png" width="900px" />
+    <img src="./readme_pics/MyMusic-1.jpeg" height="530px" />
+    <img src="./readme_pics/MyMusic-2.jpeg" height="530px" />
+    <img src="./readme_pics/MyMusic-3.jpeg" height="530px" />
+    <img src="./readme_pics/MyMusic-4.jpeg" height="530px" />
+    <img src="./readme_pics/MyMusic-5.jpeg" height="530px" />
+    <img src="./readme_pics/MyMusic-6.jpeg" height="530px" />
 </div>
 
 ***
@@ -43,7 +46,7 @@ O seu eCommerce para equipamentos musicais.
 
 3. Gere um banco de dados MongoDB e deixe o client do Mongo conectado
 
-4. Gere as tabelas do banco com as queries que estão no arquivo **tables.sql**
+4. Insira os dados do array **database_example** localizado no arquivo **store_items_example** em uma coleção nomeada **instruments** no banco gerado
 
 5. Configure o arquivo **.env**  com base no arquivo **.env.example**
 
